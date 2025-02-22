@@ -1,0 +1,13 @@
+ul{
+    color: inherit;
+}
+li{
+    color: inherit;
+    transition: 0.2s linear;
+}
+
+li:hover{
+    font-size: xx-large;
+    transition: 0.5s linear;
+    cursor: pointer;
+}

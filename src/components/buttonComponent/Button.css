@@ -1,0 +1,11 @@
+button:hover{
+    background-color: rgba(51, 33, 33, 0.884);
+    border: solid aliceblue;
+    color: white;
+    cursor: pointer;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+button{
+    background-color: var(--second-color);
+}
