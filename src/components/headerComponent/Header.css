@@ -1,13 +1,29 @@
 ul{
     color: inherit;
 }
-li{
+.item{
     color: inherit;
     transition: 0.2s linear;
 }
 
-li:hover{
+.item:hover{
     font-size: xx-large;
     transition: 0.5s linear;
     cursor: pointer;
+}
+
+.list{
+    background-color: var(--second-color);
+    scale: 1;
+    transition: 0.1s linear;
+}
+
+.option:hover{
+    cursor: pointer;
+    background-color: var(--btn-color);
+    color: aliceblue;
+}
+
+.not-show{
+    scale: 0;
 }

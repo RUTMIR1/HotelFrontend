@@ -1,5 +1,5 @@
 button:hover{
-    background-color: rgba(51, 33, 33, 0.884);
+    background-color: var(--btn-color);
     border: solid aliceblue;
     color: white;
     cursor: pointer;

@@ -7,3 +7,24 @@
 .subtittle{
     color: rgb(44, 41, 41);
 }
+.cards{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.card{
+    opacity: 0;
+}
+
+.show-card{
+    animation: reveal 1s both;
+}
+
+@keyframes reveal{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root{
+    --btn-color: rgba(51, 33, 33, 0.884);
+
     --main-color: aliceblue;
     --second-color: #C09F85;
     --letter-color: black;
@@ -15,6 +17,7 @@
 *{
     font-family:sans-serif;
     font-weight: 900;
+    box-sizing: border-box;
 }
 
 .light-theme{

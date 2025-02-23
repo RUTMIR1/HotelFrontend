@@ -1,0 +1,10 @@
+.card-structure{
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--second-color);
+}
+
+.card-structure > :first-child{
+    grid-column: span 2;
+}
