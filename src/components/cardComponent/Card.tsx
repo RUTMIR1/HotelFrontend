@@ -11,28 +11,28 @@ interface ICardProps{
 function Card({tittle, text, img, isLeft=true}:ICardProps):JSX.Element{
     return (
         <>
-            <article className="card-structure size-full text-center rounded-md">
-                <div>
-                    <h2>{tittle}</h2>
-                </div>
+            <article className="card-structure size-full text-center">
+                    <div>
+                        <h2>{tittle}</h2>
+                    </div>
                 { isLeft? (
                     <>
-                    <div className="border-4 rounded-md">
+                    <div>
                     <figure className="size-full">
-                        <img className="size-full" src={img} alt={tittle} />
+                        <img className="img-card" src={img} alt={tittle} />
                     </figure>
                     </div>
-                    <div>
+                    <div className="flex items-center p-5">
                         <p>{text}</p>
                     </div>    
                     </>):(
                     <>
-                        <div>
+                        <div className="flex items-center p-5">
                             <p>{text}</p>
                         </div>
-                        <div className="border-4 rounded-md">
+                        <div>
                             <figure className="size-full">
-                                <img className="size-full" src={img} alt={tittle} />
+                                <img className="img-card" src={img} alt={tittle} />
                             </figure>
                         </div>
                     </>)}

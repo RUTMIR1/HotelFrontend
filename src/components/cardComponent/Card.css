@@ -2,9 +2,21 @@
     box-shadow: 2px 4px 20px rgba(0, 0, 0, 1);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
     background-color: var(--second-color);
+    color: #222;
 }
 
 .card-structure > :first-child{
     grid-column: span 2;
+    font-size: xx-large;
+    color: rgb(252, 224, 214);
+    background-color: var(--second-color-dark);
+}
+
+.img-card{
+    border: 10px solid blanchedalmond;
+    width: 100%;
+    height: 500px; 
+    object-fit: cover;
 }
