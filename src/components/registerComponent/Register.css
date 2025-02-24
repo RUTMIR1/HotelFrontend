@@ -1,0 +1,13 @@
+.form-style{
+    background-color: blanchedalmond;
+}
+
+.form-style input{
+    padding: 1rem;
+    height: 2.5rem;
+    color: black;
+}
+
+.form-style input:focus{
+    outline: auto rgb(0, 140, 255);
+}

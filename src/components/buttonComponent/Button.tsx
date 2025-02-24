@@ -8,7 +8,7 @@ export interface IButtonProps{
 
 function Button({children, onClick}:IButtonProps):JSX.Element{
     return (
-        <button className='border-4 border-stone-500 p-3 rounded-full w-auto' type='button' onClick={onClick}>
+        <button className='border-4 border-stone-500 p-3 rounded-full w-full text-base' type='button' onClick={onClick}>
             {children}
         </button>
     )
