@@ -3,34 +3,31 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import Button from "../buttonComponent/Button"
 import './Header.css'
+import { useUserContext } from "../../provider/userProvider"
+import { logout } from "../../services/autoService"
+import { useThemeContext } from "../../provider/themeProvider"
 
 
 function Header():JSX.Element{
+    const {user, setUser} = useUserContext();
+    const {theme, setTheme} = useThemeContext();
+    const [isMenuThemeOpen, setIsMenuThemeOpen] = useState(false);
 
     const navigate = useNavigate();
 
-    const getUserTheme = ():string =>{
-        const storedTheme:string | null = window.localStorage.getItem("theme");
-        if(storedTheme) return storedTheme;
-        return window.matchMedia("(prefers-color-scheme)").matches ? "dark" : "light";
+    const handlerLogOut = async():Promise<void>=>{
+        await logout();
+        setUser(undefined);
+        navigate('/home');
     }
-    const [theme, setTheme] = useState(getUserTheme());
-    const [isMenuThemeOpen, setIsMenuThemeOpen] = useState(false);
-    
     useEffect(():void=>{
         setIsMenuThemeOpen(false);
-        const elements:NodeListOf<Element> = window.document.querySelectorAll('[data-theme]');
-        elements.forEach((el:Element)=>{
-            el.classList.remove('light-theme', 'dark-theme');
-            el.classList.add(`${theme}-theme`);
-        });
-        window.localStorage.setItem('theme',theme);
     }, [theme]);
 
     return (
         <>
-        <header className="light-theme z-999 text-2xl p-3 h-25 flex justify-around items-center gap-2
-         text-center sticky top-0 right-0 left-0 font-black" data-theme>
+        <header className={`light-theme z-999 text-2xl p-3 h-25 flex justify-around items-center gap-2
+         text-center sticky top-0 right-0 left-0 font-black ${theme}`}>
             <figure className="flex items-center w-25 max-md:hidden">
                 <img className="" src="icon.png" alt="icon"/>
             </figure>
@@ -56,17 +53,32 @@ function Header():JSX.Element{
                         ${isMenuThemeOpen ? '':'not-show'}`}>
                         <span>Select Theme:</span>
                         <ul>
-                            <li className="border-1 border-stone-500 option" onClick={():void =>setTheme('light')}>Light</li>
-                            <li className="border-1 border-stone-500 option" onClick={():void =>setTheme('dark')}>Dark</li>
+                            <li className="border-1 border-stone-500 option" onClick={():void =>setTheme('light-theme')}>Light</li>
+                            <li className="border-1 border-stone-500 option" onClick={():void =>setTheme('dark-theme')}>Dark</li>
                         </ul>
                     </div>
                 </div>
-                <div>
-                    <Button children={'Register'} onClick={():void | Promise<void>=> navigate('/register')}></Button>
-                </div>
-                <div>
-                    <Button children={'LogIn'} onClick={():void | Promise<void>=> navigate('/login')}></Button>
-                </div>
+                {
+                    user ? (
+                        <>
+                        <div>
+                            <Button children={'Perfil'} onClick={():void | Promise<void>=> navigate('/register')}></Button>
+                        </div>
+                        <div>
+                            <Button children={'LogOut'} onClick={()=>{handlerLogOut()}}></Button>
+                        </div>
+                        </>
+                    ):(
+                        <>
+                        <div>
+                            <Button children={'Register'} onClick={():void | Promise<void>=> navigate('/register')}></Button>
+                        </div>
+                        <div>
+                            <Button children={'LogIn'} onClick={():void | Promise<void>=>{navigate('/login')}}></Button>
+                        </div>
+                        </>
+                    )
+                }
             </div>
         </header>
         </>

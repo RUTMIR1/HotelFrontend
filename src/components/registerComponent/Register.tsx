@@ -1,11 +1,16 @@
 import { JSX } from "react";
 
 import './Register.css'
+import { useUser } from "../../hooks/user";
 function Register():JSX.Element{
+    const {name, lastname, age, username, password, email, phoneNumber, country, 
+        province, city, houseNumber, floor, handlerForm} = useUser();
+
+    
     return (
         <>
             <div className="text-gray-600 flex flex-col justify-start items-center text-black min-h-screen">
-                <form className="form-style bg-white w-auto max-w-lg shadow-lg p-8 rounded-lg w-full w-max-lg mt-20">
+                <form onSubmit={(e)=>handlerForm(e)} className="form-style bg-white w-auto max-w-lg shadow-lg p-8 rounded-lg w-full w-max-lg mt-20">
                     <h2 className="text-2xl text-center font-black text-gray-700 mb-7">Register</h2>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="name">Name</label>
@@ -14,6 +19,10 @@ function Register():JSX.Element{
                     <div className="flex flex-col mt-5">
                         <label htmlFor="last-name">lastName</label>
                         <input className="rounded-lg border border-gray-500" id="last-name" name="last-name" type="text" placeholder="Doe"/>
+                    </div>
+                    <div className="flex flex-col mt-5">
+                        <label htmlFor="age">Age</label>
+                        <input   className="rounded-lg border border-gray-500" id="age" name="age" type="number" placeholder="Doe"/>
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="username">Username</label>
@@ -46,11 +55,11 @@ function Register():JSX.Element{
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="house-number">House Number</label>
-                        <input className="rounded-lg border border-gray-500" id="house-number" name="house-number" type="text" placeholder="80"/>
+                        <input className="rounded-lg border border-gray-500" id="house-number" name="house-number" type="number" placeholder="80"/>
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="floor">Floor</label>
-                        <input className="rounded-lg border border-gray-500" id="floor" name="floor" type="text" placeholder="2"/>
+                        <input className="rounded-lg border border-gray-500" id="floor" name="floor" type="number" placeholder="2"/>
                     </div>
                     <h3 className="text-xl text-center mt-5">Accept terms and conditions</h3>
                     <a className="text-blue-500 text-center block" href="">Look Terms and Conditions</a>

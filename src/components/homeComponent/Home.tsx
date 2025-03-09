@@ -1,31 +1,10 @@
-import { JSX, useEffect, useRef } from "react";
+import { JSX } from "react";
 import './Home.css'
 import Card from "../cardComponent/Card";
 import { homeCards } from "../../utils/utils";
+import { useObserverElements } from "../../hooks/observerElements";
 function Home():JSX.Element{
-    const elementRef = useRef<(HTMLDivElement | null)[]>([]);
-
-    useEffect(()=>{
-        const observer = new IntersectionObserver(
-            (entries)=>{
-                  entries.forEach((el) => {
-                    if(el.isIntersecting){
-                       el.target.classList.add('show-card');
-                       observer.unobserve(el.target);
-                     }
-                }); 
-            },{
-                root: null,
-                threshold:0.5
-            }
-        )
-        elementRef.current.forEach((el)=>{
-           if(el) observer.observe(el);
-        })
-
-        return () => observer.disconnect();
-    },[]);
-
+    const { elementRef } = useObserverElements();
     return(
         <>
             <figure className="relative font-black text-center">

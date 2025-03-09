@@ -1,10 +1,33 @@
-import { JSX } from "react";
+import React, { JSX } from "react";
+import { login, me } from "../../services/autoService";
 import './LogIn.css'
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../provider/userProvider";
+
 function LogIn():JSX.Element{
+    const navigate = useNavigate();
+    const {setUser} = useUserContext();
+    const handlerLogIn = async (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget);
+        try{
+            await login({username: formData.get("username") as string, password: formData.get("password") as string});
+            const userData = await me();
+            if(userData){
+                setUser(userData);
+                navigate("/home");
+            }else{
+                console.log("not user after login");
+            }
+        }catch(err){
+            console.error(err);
+        }
+    }
+
     return (
         <>
            <div className="flex flex-col justify-start items-center min-h-screen">
-            <form className="form-style bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mt-20">
+            <form onSubmit={handlerLogIn} className="form-style bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mt-20">
                 <h2 className="text-2xl font-black text-center text-gray-700 mb-6">
                 Log In
                 </h2>
