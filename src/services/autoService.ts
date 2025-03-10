@@ -1,3 +1,4 @@
+import { UserType } from "../schemas/User";
 import requestFetch from "./api";
 const endpoint:string = 'auth/';
 
@@ -32,6 +33,20 @@ export const me = async ()=>{
         return response;
     }catch(err){
         console.log(err)
+        return undefined;
+    }
+}
+
+export const register = async(body:UserType)=>{
+    try{
+        const response = await requestFetch(`${endpoint}register`, {
+            headers: {'Content-type':'application/json'},
+            method:'POST',
+            body:JSON.stringify(body),
+        })
+        return response;
+    }catch(err){
+        console.log(err);
         return undefined;
     }
 }
