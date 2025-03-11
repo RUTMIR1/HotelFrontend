@@ -12,49 +12,49 @@ function Register():JSX.Element{
                     <h2 className="text-2xl text-center font-black text-gray-700 mb-7">Register</h2>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="name">Name</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="name" name="name" type="text" placeholder="Jhon"/>
+                        <input required className={`rounded-lg border ${user.name.status?"border-red-500":"border-gray-500"}`} id="name" name="name" type="text" placeholder="Jhon"/>
                     </div>
                     <div className="text-red-500">
                         {user.name.status ? `${user.name.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="last-name">lastName</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="last-name" name="last-name" type="text" placeholder="Doe"/>
+                        <input required className={`rounded-lg border ${user.last_name.status?"border-red-500":"border-gray-500"}`} id="last-name" name="last-name" type="text" placeholder="Doe"/>
                     </div>
                     <div className="text-red-500">
                         {user.last_name.status ? `${user.last_name.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="age">Age</label>
-                        <input   className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="age" name="age" type="number" placeholder="Doe"/>
+                        <input required   className={`rounded-lg border ${user.age.status?"border-red-500":"border-gray-500"}`} id="age" name="age" type="number" placeholder="Doe"/>
                     </div>
                     <div className="text-red-500">
                         {user.age.status ? `${user.age.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="username">Username</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="username" name="username" type="text" placeholder="JhonDoe"/>
+                        <input required className={`rounded-lg border ${user.username.status?"border-red-500":"border-gray-500"}`} id="username" name="username" type="text" placeholder="JhonDoe"/>
                     </div>
                     <div className="text-red-500">
                         {user.username.status ? `${user.username.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="password">Password</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="password" name="password" type="password"/>
+                        <input required className={`rounded-lg border ${user.password.status?"border-red-500":"border-gray-500"}`} id="password" name="password" type="password"/>
                     </div>
                     <div className="text-red-500">
                         {user.password.status ? `${user.password.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="email">Email</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="email" name="email" type="email" placeholder="JhonDoe@gmail.com"/>
+                        <input required className={`rounded-lg border ${user.email.status?"border-red-500":"border-gray-500"}`} id="email" name="email" type="email" placeholder="JhonDoe@gmail.com"/>
                     </div>
                     <div className="text-red-500">
                         {user.email.status ? `${user.email.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="phone">Phone Number</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="phone" name="phone" type="text" placeholder="+5434156321"/>
+                        <input required className={`rounded-lg border ${user.phone_number.status?"border-red-500":"border-gray-500"}`} id="phone" name="phone" type="text" placeholder="+5434156321"/>
                     </div>
                     <div className="text-red-500">
                         {user.phone_number.status ? `${user.phone_number.data}`:``}
@@ -62,35 +62,35 @@ function Register():JSX.Element{
                     <h3 className="text-xl text-center mt-5">Address</h3>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="country">Country</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="country" name="country" type="text" placeholder="Argentina"/>
+                        <input required className={`rounded-lg border ${user.country.status?"border-red-500":"border-gray-500"}`} id="country" name="country" type="text" placeholder="Argentina"/>
                     </div>
                     <div>
                         {user.country.status ? `${user.country.data}`: ``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="province">Province</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="province" name="province" type="text" placeholder="Cordoba"/>
+                        <input required className={`rounded-lg border ${user.province.status?"border-red-500":"border-gray-500"}`} id="province" name="province" type="text" placeholder="Cordoba"/>
                     </div>
                     <div className="text-red-500">
                         {user.province.status ? `${user.province.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="city">City</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="city" name="city" type="text" placeholder="Alta Gracia"/>
+                        <input required className={`rounded-lg border ${user.city.status?"border-red-500":"border-gray-500"}`} id="city" name="city" type="text" placeholder="Alta Gracia"/>
                     </div>
                     <div className="text-red-500">
                         {user.city.status ? `${user.city.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="house-number">House Number</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="house-number" name="house-number" type="number" placeholder="80"/>
+                        <input required className={`rounded-lg border ${user.house_number.status?"border-red-500":"border-gray-500"}`} id="house-number" name="house-number" type="number" placeholder="80"/>
                     </div>
                     <div className="text-red-500">
                         {user.house_number.status ? `${user.house_number.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <label htmlFor="floor">Floor:</label>
-                        <input className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="floor" name="floor" type="number" placeholder="2"/>
+                        <input required className={`rounded-lg border ${user.floor.status?"border-red-500":"border-gray-500"}`} id="floor" name="floor" type="number" placeholder="2"/>
                     </div>
                     <div className="text-red-500">
                         {user.floor.status ? `${user.floor.data}`:``}

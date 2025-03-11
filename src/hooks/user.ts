@@ -41,8 +41,6 @@ export function useUser(){
         }
         //const response = await userValidation(userObject);
         const response = await register(userObject);
-        //console.log(response);
-
         if(!(response.status >= 200 && response.status <= 299)){
             setUser((prevUser)=>{
                 const newUser = {...prevUser};
@@ -52,7 +50,6 @@ export function useUser(){
                         if(el.field === key){
                             newUser[key as keyof typeof newUser].status = true;
                             newUser[key as keyof typeof newUser].data = el.message;
-                            break;
                         }
                     }
                 }
