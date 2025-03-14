@@ -1,9 +1,12 @@
-import { JSX, use, useEffect } from "react";
+import { JSX, useState } from "react";
 
 import './Register.css'
 import { useUser } from "../../hooks/user";
+import ModalText from "../modalTextComponent/modalText";
+import { termsConditions } from "../../utils/utils";
 function Register():JSX.Element{
     const {user, handlerForm} = useUser();
+    const [isModal, setIsModal] = useState(false);
 
     return (
         <>
@@ -96,18 +99,25 @@ function Register():JSX.Element{
                         {user.floor.status ? `${user.floor.data}`:``}
                     </div>
                     <h3 className="text-xl text-center mt-5">Accept terms and conditions</h3>
-                    <a className="text-blue-500 text-center block" href="">Look Terms and Conditions</a>
+                    <a onClick={(e)=>{
+                        e.preventDefault();
+                        setIsModal(true)}
+                        } className="text-blue-500 text-center block" href="">Look Terms and Conditions</a>
                     <div className="flex justify-center items-center mt-5">
                         <label htmlFor="accept">Yes:</label>
-                        <input className="cursor-pointer w-5" id="accept" name="ok" type="radio" value={'true'} />
+                        <input className="cursor-pointer w-5" id="accept" name="ok" type="radio" value={'true'} required defaultChecked />
                         <label htmlFor="reject">No:</label>
-                        <input className="cursor-pointer w-5" id="reject" name="ok" type="radio" value={'false'}/>
+                        <input className="cursor-pointer w-5" id="reject" name="ok" type="radio" value={'false'} required/>
+                    </div>
+                    <div className="text-red-500">
+                        {user.ok.status ? `${user.ok.data}`:``}
                     </div>
                     <div className="flex flex-col mt-5">
                         <button type="submit" className="rounded-lg py-2 wx-4 w-full transition duration 300">Register</button>
                     </div>
                 </form>
             </div>
+            {isModal? <ModalText title="Terms and Conditions" text={termsConditions} setModal={setIsModal}></ModalText> : ``};
         </>
     )
 }

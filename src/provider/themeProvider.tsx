@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react"
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
 const themeContext = createContext<{theme:string; setTheme:React.Dispatch<React.SetStateAction<string>>} | undefined>(undefined);
 
@@ -15,7 +15,11 @@ interface IThemeProviderProps{
 }
 
 export function ThemeProvider({children}:IThemeProviderProps){
-    const [theme, setTheme] = useState<string>('light-theme');
+    const [theme, setTheme] = useState<string>(window.localStorage.getItem('theme') || 'light-theme');
+
+    useEffect(()=>{
+        window.localStorage.setItem('theme',theme);
+    }, [theme]);
 
     return (
         <>

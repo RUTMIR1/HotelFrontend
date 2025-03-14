@@ -32,13 +32,11 @@ function Header():JSX.Element{
                 <img className="" src="icon.png" alt="icon"/>
             </figure>
             <nav className="flex flex-auto items-center justify-around max-lg:hidden">
-                    <NavLink className={'item'} to='/'>Home</NavLink>
+                    <NavLink className={'item'} to='/home'>Home</NavLink>
                     <a className="item">
                         Services
-                    </a>   
-                    <a className="item">
-                        Rooms
                     </a>
+                    <NavLink className={'item'} to='/rooms'>Rooms</NavLink>
                     <a className="item">
                         Contact
                     </a>
