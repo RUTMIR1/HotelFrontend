@@ -8,6 +8,7 @@ import LogIn from './components/logInComponent/LogIn'
 import Register from './components/registerComponent/Register'
 import { useThemeContext } from './provider/themeProvider'
 import Rooms from './components/RoomsComponent/Rooms'
+import Room from './components/RoomComponent/Room'
 
 function App():JSX.Element {
   const {theme} = useThemeContext();
@@ -21,6 +22,7 @@ function App():JSX.Element {
             <Route path='/login' element={<LogIn></LogIn>}></Route>
             <Route path='/register' element={<Register></Register>}></Route>
             <Route path='/rooms' element={<Rooms></Rooms>}></Route>
+            <Route path='/rooms/room/:id' element={<Room></Room>} ></Route>
             <Route path='*' element={<Home></Home>}></Route>
           </Routes>
         </main>

@@ -9,6 +9,13 @@ export const getAllRooms = async ()=>{
     return response;
 }
 
+export const getRoomById = async (id:string)=>{
+    const response = await requestFetch(`${path}${id}`,{
+        credentials: 'include'
+    })
+    return response;
+}
+
 export const getRoomsByCategory = async (category:string)=>{
     const response = await requestFetch(`${path}category/${category}`,{
         credentials:'include'
