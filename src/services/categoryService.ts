@@ -6,5 +6,6 @@ export const getAllCategories = async ()=>{
     const response = await requestFetch(`${path}`, {
         credentials:'include'
     });
-    return response;
+    const categories = await response.json();
+    return categories;
 }

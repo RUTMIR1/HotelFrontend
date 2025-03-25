@@ -6,19 +6,22 @@ export const getAllRooms = async ()=>{
     const response = await requestFetch(`${path}`, {
         credentials:'include'
     });
-    return response;
+    const rooms = await response.json();
+    return rooms;
 }
 
 export const getRoomById = async (id:string)=>{
     const response = await requestFetch(`${path}${id}`,{
         credentials: 'include'
     })
-    return response;
+    const room = await response.json();
+    return room;
 }
 
 export const getRoomsByCategory = async (category:string)=>{
     const response = await requestFetch(`${path}category/${category}`,{
         credentials:'include'
     });
-    return response;
+    const rooms = await response.json();
+    return rooms;
 }

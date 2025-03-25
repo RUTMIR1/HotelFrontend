@@ -16,6 +16,10 @@ const UserSchemaBase = z.object({
     }).int({message: 'User age must be a number integer'}).positive(
         {message: 'User age must be positive'}
     ).min(18, {message: 'User age must be greater than or equal to 18'}),
+    dni:z.string({
+        required_error: 'User DNI is required',
+        invalid_type_error: 'User DNI must be a string',
+    }),
     email: z.string({
         required_error: 'User email is required',
         invalid_type_error: 'User email must be a string',
@@ -27,7 +31,7 @@ const UserSchemaBase = z.object({
     password: z.string({
         required_error: 'User password is required',
         invalid_type_error: 'User password must be a string',
-    }),
+    }).optional(),
     phone_number: z.string({
         required_error: 'User phone number is required',
         invalid_type_error: 'User phone number must be a string'
@@ -41,7 +45,11 @@ const UserSchemaBase = z.object({
 export const UserSchema = UserSchemaBase.extend({rol: z.object({id: z.string({
     required_error: 'Rol ID is required',
     invalid_type_error: 'Rol ID must be a string'
-}).uuid({message: 'Rol ID must be a UUID string'})}, {
+}).uuid({message: 'Rol ID must be a UUID string'}),
+name:z.string({
+    required_error: 'Rol name is required',
+    invalid_type_error: 'Rol name must be a string'
+})}, {
     required_error: 'rol is required',
     invalid_type_error: 'rol must be an object'
 })});

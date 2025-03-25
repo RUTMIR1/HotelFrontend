@@ -60,7 +60,7 @@ function Header():JSX.Element{
                     user ? (
                         <>
                         <div>
-                            <Button children={'Perfil'} onClick={():void | Promise<void>=> navigate('/register')}></Button>
+                            <Button children={'Perfil'} onClick={():void | Promise<void>=> navigate('/profile')}></Button>
                         </div>
                         <div>
                             <Button children={'LogOut'} onClick={()=>{handlerLogOut()}}></Button>

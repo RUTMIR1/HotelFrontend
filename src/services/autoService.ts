@@ -14,7 +14,8 @@ export const login = async (body:IUserAuth)=>{
         body: JSON.stringify(body),
         credentials: "include"
     });
-    return response;
+    const loginData= await response.json();
+    return loginData;
 }
 
 export const logout = async ()=>{
@@ -27,10 +28,11 @@ export const logout = async ()=>{
 export const me = async ()=>{
     try{
         const response = await requestFetch(`${endpoint}me`,{credentials: "include"});
-        if(response.status < 200 || response.status > 299){
+        if(!response.ok){
             return undefined;
         }
-        return response;
+        const userData = response.json();
+        return userData;
     }catch(err){
         console.log(err)
         return undefined;
@@ -44,7 +46,11 @@ export const register = async(body:UserType)=>{
             method:'POST',
             body:JSON.stringify(body),
         })
-        return response;
+        if(!response.ok){
+            throw new Error('Registration failed');
+        }
+        const dataRegister = response.json();
+        return dataRegister;
     }catch(err){
         console.log(err);
         return undefined;

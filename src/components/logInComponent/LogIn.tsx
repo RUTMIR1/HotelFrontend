@@ -11,7 +11,8 @@ function LogIn():JSX.Element{
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         try{
-            await login({username: formData.get("username") as string, password: formData.get("password") as string});
+            const result = await login({username: formData.get("username") as string, password: formData.get("password") as string});
+            console.log(result);
             const userData = await me();
             if(userData){
                 setUser(userData);

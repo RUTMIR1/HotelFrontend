@@ -3,7 +3,8 @@ import { me } from "../services/autoService";
 
 export interface IUserSession{
     username:string,
-    rol:string
+    rol:string,
+    id:string,
 }
 
 const userContext = React.createContext<{user:IUserSession | undefined; setUser:React.Dispatch<React.SetStateAction<IUserSession| undefined>>
