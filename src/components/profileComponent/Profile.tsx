@@ -2,6 +2,7 @@ import { JSX } from "react";
 import { UseUserData } from "../../hooks/userData";
 import { useUserContext } from "../../provider/userProvider";
 import { useThemeContext } from "../../provider/themeProvider";
+import Button from "../buttonComponent/Button";
 
 function Profile():JSX.Element{
     const {theme} = useThemeContext();
@@ -53,15 +54,39 @@ function Profile():JSX.Element{
                                 <p className="text-lg">{`${userData?.rol.name}`}</p>
                             </div>
                         </div>
+                        <div className="flex flex-col items-center">
                         {
                             userData?.rol.name === "administrator" || userData?.rol.name === "owner" ?
-                            <div className="mt-5">
-                                <button className="text-3xl" type="button"> Usuarios </button>
-                            </div>
+                            (
+                                <>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>Users</Button>
+                                    </div>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>Rooms</Button>
+                                    </div>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>Reserves</Button>
+                                    </div>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>Categories</Button>
+                                    </div>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>Rols</Button>
+                                    </div>
+                                </>
+                            )
                             : ''
+                        }{
+                            userData?.rol.name === "user" &&
+                            (
+                                <>
+                                    <div className="text-2xl mt-5 w-full max-w-md">
+                                        <Button>My Reserves</Button>
+                                    </div>
+                                </>
+                            )
                         }
-                        <div className="mt-5">
-                            <button className="text-3xl" type="button"> Mis Reservas</button>
                         </div>
                         
                     </>)
