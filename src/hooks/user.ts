@@ -42,7 +42,7 @@ export function useUser(){
                 email: formData.get('email') as string,
                 phone_number: formData.get('phone') as string,
                 address:address,
-                rol:{id:'693b0754-e1e7-11ef-8f63-0242ac130002'}
+                rol:{id:'693b0754-e1e7-11ef-8f63-0242ac130002', name:'user'}
             }
             const response = await register(userObject);
             if(!(response.status >= 200 && response.status <= 299)){

@@ -3,11 +3,14 @@ import { UseUserData } from "../../hooks/userData";
 import { useUserContext } from "../../provider/userProvider";
 import { useThemeContext } from "../../provider/themeProvider";
 import Button from "../buttonComponent/Button";
+import { useNavigate } from "react-router-dom";
 
 function Profile():JSX.Element{
     const {theme} = useThemeContext();
     const {user} = useUserContext();
     const {userData, err} = UseUserData(user?.id);
+
+    const navigate = useNavigate();
     
     return (
         <>
@@ -60,7 +63,7 @@ function Profile():JSX.Element{
                             (
                                 <>
                                     <div className="text-2xl mt-5 w-full max-w-md">
-                                        <Button>Users</Button>
+                                        <Button onClick={()=>navigate("/profile/manage")}>Users</Button>
                                     </div>
                                     <div className="text-2xl mt-5 w-full max-w-md">
                                         <Button>Rooms</Button>

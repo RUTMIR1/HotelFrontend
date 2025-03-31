@@ -12,3 +12,14 @@ export const getUserById = async (id:string)=>{
     }   
     return user;
 }
+
+export const getAllUsers = async ()=>{
+    const response = await requestFetch(`${endpoint}`,{
+        credentials: 'include'
+    });
+    const users = await response.json();
+    if(!response.ok){
+        throw new Error(users.message);
+    }
+    return users;
+}
