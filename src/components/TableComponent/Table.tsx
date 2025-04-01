@@ -1,61 +1,44 @@
-import { JSX } from "react";
-
+import { JSX, useEffect } from "react"; 
+import { UseTable } from "../../hooks/table";
 
 interface ITableProps{
     model:object;
     list:object[];
+    title?:string;
 }
-function Table({model, list}:ITableProps):JSX.Element{
-    console.log(model)
-    console.log(list)
+function Table({model, list, title='Model'}:ITableProps):JSX.Element{
+    const {headers, getAllNodesLvl, getLvlMaxTree} = UseTable(model, title);
 
-    const headers:string[] = Object.keys(model);
-    const headersValues:unknown[] = Object.values(model);
+    useEffect(()=>{
+        
+    }, [headers, list])
+    //const header1:string[] = Object.keys(model);
+    //const headersValues:unknown[] = Object.values(model);
     const body:object[] =[];
     for(const el of list){
         body.push(el);
     }
-
-    const createHeaders =  (model, numKeys)=>{
-        
-    }
-
     return (
         <>
-            {
-                list && (<table className="mt-5 outline">
+            <table>
+                <caption className="outline text-4xl">{title}</caption>
                 <thead>
-                    <tr>
-                        {
-                          headers.map((el, index)=>{
-                              if(typeof headersValues[index] !== 'object'){
-                                  return <th className="outline" scope="col">{el}</th>
-                                }else{
-                                   if(headersValues[index]){
-                                       return <th className="outline" colSpan={Object.keys(headersValues[index]).length} scope="col">{el}</th>
-                                   }
-                             }
-                          })
-                        }
-                    </tr>
-                    <tr>
-                        {
-                            headers.map((el, index)=>{
-                                if(typeof headersValues[index] !== 'object'){
-                                    return <th scope="col"></th>
-                                  }else{
-                                    Array.from(headersValues[index]).map(el=>{
-                                        if(headersValues[index]){
-                                            return <th className="outline" colSpan={Object.keys(headersValues[index]).length} scope="col">{el}</th>
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    </tr>
+                    {
+                        headers &&
+                        [...Array(getLvlMaxTree([headers]))].map((_, i) => (
+                            (i !== 0)&&
+                                <tr>
+                                    {
+                                        getAllNodesLvl([headers], i).map((el)=>(
+                                            <th className="outline" colSpan={el.colSpan}>{el.value}</th>
+                                        ))
+                                    }
+                                </tr>
+                        ))
+                    }
                 </thead>
                 <tbody>
-                    {
+                {
                         body.map(el=>{
                             return (
                                 <tr>
@@ -76,7 +59,6 @@ function Table({model, list}:ITableProps):JSX.Element{
                     }
                 </tbody>
             </table>
-            )}
         </>
     )
 }
