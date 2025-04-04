@@ -5,8 +5,10 @@ interface ITableProps{
     model:object;
     list:object[];
     title?:string;
+    onDelete?:()=>void;
+    onUpdate?:()=>void;
 }
-function Table({model, list, title='Model'}:ITableProps):JSX.Element{
+function Table({model, list, title='Model', onDelete, onUpdate}:ITableProps):JSX.Element{
     const {headers, getAllNodesLvl, getLvlMaxTree} = UseTable(model, title);
 
     useEffect(()=>{
@@ -41,6 +43,10 @@ function Table({model, list, title='Model'}:ITableProps):JSX.Element{
                         body.map((el)=>{
                             return (
                                 <tr className="w-full">
+                                    <td className="bg-stone-400 outline">
+                                        <button className="w-full h-10 rounded-md border bg-red-500 hover:cursor-pointer hover:bg-red-950" type="button" onClick={onDelete}>Delete</button>
+                                        <button className="w-full h-10 rounded-md border mt-2 bg-amber-500 hover:cursor-pointer hover:bg-amber-800" type="button" onClick={onUpdate}>Update</button>
+                                    </td>
                                     {
                                         Object.values(el).map((value)=>{
                                             if(typeof value !== 'object'){

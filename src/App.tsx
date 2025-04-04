@@ -11,6 +11,7 @@ import Rooms from './components/RoomsComponent/Rooms'
 import Room from './components/RoomComponent/Room'
 import Profile from './components/profileComponent/Profile'
 import UserManage from './components/userManageComponent/UserManage'
+import Form from './components/formComponent/Form'
 
 function App():JSX.Element {
   const {theme} = useThemeContext();
@@ -26,6 +27,7 @@ function App():JSX.Element {
             <Route path='/rooms' element={<Rooms></Rooms>}></Route>
             <Route path='/profile' element={<Profile></Profile>}></Route>
             <Route path='/profile/manage/' element={<UserManage></UserManage>}></Route>
+            <Route path='/profile/manage/add' element={<Form></Form>}></Route>
             <Route path='/rooms/room/:id' element={<Room></Room>} ></Route>
             <Route path='*' element={<Home></Home>}></Route>
           </Routes>

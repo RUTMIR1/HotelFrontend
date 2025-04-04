@@ -13,7 +13,6 @@ interface PropsCardReducer{
 
 export const modelReducer = async ({state, action}:PropsCardReducer):Promise<Record<string,unknown>[]>=>{
     let newModels:Record<string, unknown>[] = [];
-    console.log(action.type);
     switch(action.type){
         case 'ADD':
             if(!action.endpoint) return newModels;
@@ -25,7 +24,7 @@ export const modelReducer = async ({state, action}:PropsCardReducer):Promise<Rec
             }).then(
                 response =>{
                     console.log(response)
-                }         
+                }
             ).catch(err=>{
                 console.log(err);
             })
@@ -47,16 +46,14 @@ export const modelReducer = async ({state, action}:PropsCardReducer):Promise<Rec
             )
             break;
         case 'FILTER':
-            console.log("me ejecuto")
-            console.log("soy state", state);
-            newModels = state.map(el =>{
-                console.log(el[`${action.payload.filter}`])
-                console.log(action.payload.match);
-                if(el[`${action.payload.filter}`] === action.payload.match){
-                    return el;
+            newModels = state.filter(el =>{
+                if(new RegExp(`${action.payload.match}`).test(el[`${action.payload.filter}`] as string)){
+                    return true;
+                }else if(action.payload.match === ''){
+                    return true;
                 }
-                return {};
             });
+            break;
     }   
     return newModels;
 }

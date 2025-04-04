@@ -1,11 +1,10 @@
-button:hover{
+.btn{
+    background-color: var(--second-color);
+}
+.btn:hover{
     background-color: var(--btn-color);
     border: solid aliceblue;
     color: white;
     cursor: pointer;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-button{
-    background-color: var(--second-color);
 }

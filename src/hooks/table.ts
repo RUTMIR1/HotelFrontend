@@ -7,16 +7,31 @@ export const UseTable = (model:object, title:string='Model')=>{
     //const [lvlModel, setLvlModel] = useState<number>();
 
     useEffect(()=>{
-        const createHeaders = (model:Record<string, unknown>, name:string):TableTree=>{
-            const origin:TableTree = {
-                typeNode: 'tr',
-                value: name,
-                colSpan: 0,
-                children: []
+        const createHeaders = (model:Record<string, unknown>, name:string, first:boolean=true):TableTree=>{
+            let origin:TableTree;
+            if(first){
+                origin = {
+                    typeNode: 'tr',
+                    value: name,
+                    colSpan: 1,
+                    children: [{
+                        typeNode: 'th',
+                        value: 'Actions',
+                        colSpan: 1,
+                        children: []
+                    }]
+                }
+            }else{
+                origin = {
+                    typeNode: 'tr',
+                    value: name,
+                    colSpan: 0,
+                    children: []
+                }
             }
             for(const key in model){
                 if(typeof model[key] === 'object' && model[key] !== null){
-                    const tr:TableTree = createHeaders(model[key] as Record<string, unknown>, key);
+                    const tr:TableTree = createHeaders(model[key] as Record<string, unknown>, key, false);
                     origin.children.push(tr);
                     origin.colSpan += tr.children.length;
                 }else{
