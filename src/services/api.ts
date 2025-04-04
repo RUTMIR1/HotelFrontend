@@ -5,4 +5,13 @@ const requestFetch = async (endpoint:string, options={})=>{
     return response;
 }
 
+export const requestModel = async (endpoint:string, options={})=>{
+    const response = await fetch(`${API_URL}${endpoint}`, options);
+    const data = await response.json();
+    if(!response.ok){
+        throw new Error(data.message);
+    }
+    return data;
+}
+
 export default requestFetch;
