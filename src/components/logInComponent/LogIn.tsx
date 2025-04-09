@@ -3,6 +3,7 @@ import { login, me } from "../../services/autoService";
 import './LogIn.css'
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../provider/userProvider";
+import Button from "../buttonComponent/Button";
 
 function LogIn():JSX.Element{
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ function LogIn():JSX.Element{
 
     return (
         <>
-           <div className="flex flex-col justify-start items-center min-h-screen">
+           <div className="flex flex-col justify-start items-center">
             <form onSubmit={handlerLogIn} className="form-style bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mt-20">
                 <h2 className="text-2xl font-black text-center text-gray-700 mb-6">
                 Log In
@@ -55,12 +56,7 @@ function LogIn():JSX.Element{
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 </div>
-                <button
-                type="submit"
-                className="w-full text-stone-900 py-2 px-4 rounded-lg transition duration-300"
-                >
-                LogIn
-                </button>
+                <Button type="submit">LogIn</Button>
             </form>
            </div>
         </>

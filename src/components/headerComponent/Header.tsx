@@ -44,9 +44,11 @@ function Header():JSX.Element{
                         About Hotel
                     </a>
             </nav>
-            <div className="flex flex-row justify-center text-base max-md:w-auto">
+            <div className="flex justify-center gap-3 text-base">
                 <div className="relative">
-                    <Button children={'Theme'} onClick={():void=>setIsMenuThemeOpen(!isMenuThemeOpen)}></Button>
+                    <div className="max-w-md">
+                        <Button children={'Theme'} onClick={():void=>setIsMenuThemeOpen(!isMenuThemeOpen)}></Button>
+                    </div>
                     <div className={`absolute top-15 left-0 list text-sm border-2 border-stone-500
                         ${isMenuThemeOpen ? '':'not-show'}`}>
                         <span>Select Theme:</span>

@@ -105,9 +105,9 @@ function Register():JSX.Element{
                         } className="text-blue-500 text-center block" href="">Look Terms and Conditions</a>
                     <div className="flex justify-center items-center mt-5">
                         <label htmlFor="accept">Yes:</label>
-                        <input className="cursor-pointer w-5" id="accept" name="ok" type="radio" value={'true'} required defaultChecked />
+                        <input className="cursor-pointer w-5" id="accept" name="ok" type="radio" value={'true'} required />
                         <label htmlFor="reject">No:</label>
-                        <input className="cursor-pointer w-5" id="reject" name="ok" type="radio" value={'false'} required/>
+                        <input className="cursor-pointer w-5" id="reject" name="ok" type="radio" value={'false'} required defaultChecked/>
                     </div>
                     <div className="text-red-500">
                         {user.ok.status ? `${user.ok.data}`:``}

@@ -33,7 +33,7 @@ function UserManage():JSX.Element{
                 }} type="text" />
             </div>
             <button className="mt-5 w-full h-10 rounded-md border bg-green-400 hover:cursor-pointer hover:bg-green-800" type="button"
-            onClick={()=>{navigate('/profile/manage/add')}}>Add</button>
+            onClick={()=>{navigate('/profile/manage/user')}}>Add</button>
             <div>
                 {
                     query && <Table model={list[0]} list={currentList} title={query}></Table>

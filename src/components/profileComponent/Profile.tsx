@@ -63,7 +63,7 @@ function Profile():JSX.Element{
                             (
                                 <>
                                     <div className="text-2xl mt-5 w-full max-w-md">
-                                        <Button onClick={()=>navigate(`/profile/manage/?type=Users`)}>Users</Button>
+                                        <Button onClick={()=>navigate(`/profile/manage/?type=user`)}>Users</Button>
                                     </div>
                                     <div className="text-2xl mt-5 w-full max-w-md">
                                         <Button>Rooms</Button>

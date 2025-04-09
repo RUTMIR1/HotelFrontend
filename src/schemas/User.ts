@@ -1,5 +1,6 @@
 import z from 'zod';
-import { AddressSchema } from './Address';
+import { AddressSchema} from './Address';
+
 const UserSchemaBase = z.object({
     id: z.string().uuid().optional(),
     name: z.string({
@@ -31,7 +32,7 @@ const UserSchemaBase = z.object({
     password: z.string({
         required_error: 'User password is required',
         invalid_type_error: 'User password must be a string',
-    }).optional(),
+    }),
     phone_number: z.string({
         required_error: 'User phone number is required',
         invalid_type_error: 'User phone number must be a string'
