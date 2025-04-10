@@ -7,7 +7,7 @@ import { termsConditions } from "../../utils/utils";
 function Register():JSX.Element{
     const {user, handlerForm} = useUser();
     const [isModal, setIsModal] = useState(false);
-
+    
     return (
         <>
             <div className="text-gray-600 flex flex-col justify-start items-center text-black min-h-screen">
@@ -30,6 +30,10 @@ function Register():JSX.Element{
                     <div className="flex flex-col mt-5">
                         <label htmlFor="age">Age</label>
                         <input required   className={`rounded-lg border ${user.age.status?"border-red-500":"border-gray-500"}`} id="age" name="age" type="number" placeholder="Doe"/>
+                    </div>
+                    <div className="flex flex-col mt-5">
+                        <label htmlFor="dni">Dni</label>
+                        <input required   className={`rounded-lg border ${user.age.status?"border-red-500":"border-gray-500"}`} id="dni" name="dni" type="text" placeholder="32456645"/>
                     </div>
                     <div className="text-red-500">
                         {user.age.status ? `${user.age.data}`:``}

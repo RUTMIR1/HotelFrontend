@@ -6,12 +6,12 @@ interface Iaction{
     endpoint?: string;
 }
 
-interface PropsCardReducer{
+interface PropsModelReducer{
     state:Record<string, unknown>[];
     action: Iaction;
 }
 
-export const modelReducer = async ({state, action}:PropsCardReducer):Promise<Record<string,unknown>[]>=>{
+export const modelReducer = async ({state, action}:PropsModelReducer):Promise<Record<string,unknown>[]>=>{
     let newModels:Record<string, unknown>[] = [];
     switch(action.type){
         case 'ADD':
@@ -31,7 +31,7 @@ export const modelReducer = async ({state, action}:PropsCardReducer):Promise<Rec
             break;
         case 'DELETE':
             if(!action.endpoint) return newModels;
-            await requestModel(`${action.endpoint}${action.payload.id}`, {
+            await requestModel(`${action.endpoint}/${action.payload.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             }).then(

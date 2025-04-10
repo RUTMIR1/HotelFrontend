@@ -1,28 +1,27 @@
-import { JSX, useEffect } from "react"; 
+import { JSX } from "react"; 
 import { UseTable } from "../../hooks/table";
 
 interface ITableProps{
     model:object;
-    list:object[];
+    list:Record<string, string | number | object>[];
     title?:string;
-    onDelete?:()=>void;
-    onUpdate?:()=>void;
+    onDelete?:({id}:{id:string})=>void;
+    onUpdate?:({id, data}:{id:string, data:object})=>void;
+    onAdd?:()=>void;
 }
-function Table({model, list, title='Model', onDelete, onUpdate}:ITableProps):JSX.Element{
+function Table({model, list, title='Model', onDelete, onUpdate, onAdd}:ITableProps):JSX.Element{
     const {headers, getAllNodesLvl, getLvlMaxTree} = UseTable(model, title);
-
-    useEffect(()=>{
-
-    }, [headers, list])
-    const body:object[] =[];
+    const body:Record<string, string | number | object>[] =[];
     for(const el of list){
         body.push(el);
     }
     return (
         <>
+        <button className="mt-5 w-full h-10 rounded-md border bg-green-400 hover:cursor-pointer hover:bg-green-800" type="button"
+            onClick={onAdd}>Add</button>
         <h2 className="text-center text-2xl outline bg-stone-600">{title}</h2>
         <div className="overflow-x-auto outline">
-            <table className="outline text-center">
+            <table className="outline text-center text-black">
                 <thead>
                     {
                         headers &&
@@ -43,17 +42,17 @@ function Table({model, list, title='Model', onDelete, onUpdate}:ITableProps):JSX
                         body.map((el)=>{
                             return (
                                 <tr className="w-full">
-                                    <td className="bg-stone-400 outline">
-                                        <button className="w-full h-10 rounded-md border bg-red-500 hover:cursor-pointer hover:bg-red-950" type="button" onClick={onDelete}>Delete</button>
-                                        <button className="w-full h-10 rounded-md border mt-2 bg-amber-500 hover:cursor-pointer hover:bg-amber-800" type="button" onClick={onUpdate}>Update</button>
+                                    <td className="bg-stone-400 outline p-2">
+                                        <button className="w-full h-10 rounded-md border bg-red-500 hover:cursor-pointer hover:bg-red-950" type="button" onClick={()=>{if(onDelete && el.id) onDelete({id:el.id as string})}}>Delete</button>
+                                        <button className="w-full h-10 rounded-md border mt-2 bg-amber-500 hover:cursor-pointer hover:bg-amber-800" type="button" onClick={()=>{if(onUpdate && el.id) onUpdate({id:el.id as string, data:el})}}>Update</button>
                                     </td>
                                     {
                                         Object.values(el).map((value)=>{
                                             if(typeof value !== 'object'){
-                                                return <td className="bg-stone-400 outline">{value}</td>
+                                                return <td className="bg-stone-400 outline p-2">{value}</td>
                                             }else{
                                                 return Object.values(value).map(value=>{
-                                                    return <td className="bg-stone-400 outline">{value as string}</td>
+                                                    return <td className="bg-stone-400 outline p-2">{value as string}</td>
                                                 })
                                             }
                                         })

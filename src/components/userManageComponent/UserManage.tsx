@@ -32,11 +32,16 @@ function UserManage():JSX.Element{
                     setCurrentList(newList);
                 }} type="text" />
             </div>
-            <button className="mt-5 w-full h-10 rounded-md border bg-green-400 hover:cursor-pointer hover:bg-green-800" type="button"
-            onClick={()=>{navigate('/profile/manage/user')}}>Add</button>
             <div>
                 {
-                    query && <Table model={list[0]} list={currentList} title={query}></Table>
+                    query && <Table model={list[0]} list={currentList} title={query} onDelete={async ({id})=>{
+                        const newList = await modelReducer({state:list, action:{type:'DELETE', payload:{id}, endpoint:'User'}});
+                        setList(newList);
+                        setCurrentList(newList);
+                    }} onUpdate={(({id, data})=>{
+                        navigate(`/profile/manage/user?type=${query}&action=Update`, {state:{
+                            id, data}})
+                    })} onAdd={()=>navigate(`/profile/manage/user?type=${query}&action=Create`)}></Table>
                 }
             </div>
         </>
