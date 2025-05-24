@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import Button from "../buttonComponent/Button";
 
 interface IRoomCardProps{
     title:string;
@@ -24,7 +25,7 @@ function RoomCard({title, text, price, img, nameAction, action}:IRoomCardProps):
                     ${price} x 30 days
                 </div>
                 <div className="m-5 w-full h-10">
-                    <button onClick={action} className="w-full h-full" type="button">{nameAction}</button>
+                    <Button onClick={action} type='button'>{nameAction}</Button>
                 </div>
             </div>
         </>

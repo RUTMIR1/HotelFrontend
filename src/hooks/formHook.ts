@@ -1,49 +1,31 @@
 import { FormEvent, useState } from "react"
-import { ModelFactory } from "../model/ModelFactory";
-import { SafeParseReturnType } from "zod";
-import { fieldsList } from "../utils/utils";
-import { Model } from "../model/model";
+import { Model } from "../model/Model";
+import { responseError } from "../types/utilTypes";
 
 interface IFormProps{
     e:FormEvent<HTMLFormElement>;
-    model:string;
-    action:(data:Model)=>Promise<void>;
+    currentModel:Model;
+    action:(data:Model)=>Promise<responseError>;
+    actionEnd:()=>Promise<void>;
 }  
 
 export const useForm = ()=>{
     const [errorsInput, setErrorsInput] = useState<Record<string, string>>({});
-    const [formError, setFormError] = useState<string>();
 
-    const handlerForm = async ({e, model, action }:IFormProps)=>{
+    const handlerForm = async ({e, currentModel, action, actionEnd }:IFormProps)=>{
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const data:Record<string, string> = {};
-        formData.forEach((value, key)=>{
-            data[key] = value as string;
-        })
-        console.log("esta es la data!! ", data);
-        const currentModel = ModelFactory.createModel({model,data});
-        if(currentModel){
-            const result = await currentModel.validateModel(currentModel) as SafeParseReturnType<unknown, unknown>;
-            if(!result.success){
-                const fieldsErrors = fieldsList(result.error);
-                const objectError:Record<string, string> = {};
-                fieldsErrors.forEach(el=>{
+        const result = await action(currentModel);
+        if(!(result.status >= 200 && result.status <= 299)){
+            const objectError:Record<string, string> = {};
+            if(result.data){
+                result.data.forEach(el=>{
                     objectError[el.field] = el.message;
                 });
-                setErrorsInput(objectError);
-            }else{
-                try{
-                    console.log("esto es current model", currentModel);
-                    await action(currentModel);
-                }catch(error){
-                    setFormError((error as Error).message);
-                }
             }
+            setErrorsInput(objectError);
         }else{
-            setFormError('Error Model in Form')
+            actionEnd();
         }
     }   
-
-    return { errorsInput, formError, handlerForm };
+    return { errorsInput, handlerForm };
 }

@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
-import { RoomType } from "../schemas/Room";
-import { getRoomById } from "../services/roomService";
+import { getAllRooms, getRoomById } from "../services/roomService";
+import { Room } from "../model/Room";
 
-export const useRoom = (id:string)=>{
-    const [room, setRoom] = useState<RoomType | null>(null);
+export const useRoom = (id:string='')=>{
+    const [rooms, setRooms] = useState<Room[]>();
+    const [room, setRoom] = useState<Room>();
+    const [loadingRooms, setLoadingRooms] = useState<boolean>(true);
+    const [errorRooms, setErrorRooms] = useState<string>();
 
     useEffect(()=>{
         if(id){
             getRoomById(id).then(
                 (response)=>{
-                    console.log("se consiguio")
                     setRoom(response);
                 }
+            ).catch(err=>{
+                setErrorRooms(err.message);
+            }).finally(
+                ()=>setLoadingRooms(false)
+            );
+        }else{
+            getAllRooms().then(
+                (response)=>{
+                    setRooms(response);
+                }
+            ).catch(err=>{
+                setErrorRooms(err.message);
+            }).finally(
+                ()=>setLoadingRooms(false)
             );
         }
     }, [id]);
-    return {room};
+    return {rooms, errorRooms, loadingRooms, room};
 }

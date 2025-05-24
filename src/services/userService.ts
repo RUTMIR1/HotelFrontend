@@ -1,4 +1,4 @@
-import { User } from "../model/user";
+import { User } from "../model/User";
 import requestFetch from "./api";
 
 const endpoint:string = 'user/';
@@ -33,13 +33,10 @@ export const createUser = async (user:User)=>{
     body: JSON.stringify(user),
   });
   const userResponse = await response.json();
-  if(!response.ok){
-    throw new Error(userResponse.message); 
-  }
   return userResponse;
 }
 
-export const updateUser = async (id:string, user:User)=>{
+export const updateUser = async (id:string, user:Partial<User>)=>{
     const response = await requestFetch(`${endpoint}${id}`,{
         headers:{"Content-type":"application/json"},
         credentials: 'include',
@@ -47,8 +44,14 @@ export const updateUser = async (id:string, user:User)=>{
         body: JSON.stringify(user)
     })
     const userResponse = await response.json();
-    if(!response.ok){
-        throw new Error(userResponse.message);
-    }
     return userResponse;
+}
+
+export const deleteUser = async (id:string)=>{
+    const response = await requestFetch(`${endpoint}${id}`,{
+        method:'DELETE',
+        credentials:'include'
+    })
+    const deletedUser = response.json();
+    return deletedUser;
 }

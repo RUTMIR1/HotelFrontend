@@ -1,13 +1,16 @@
 import React, { JSX } from "react";
 import { login, me } from "../../services/autoService";
 import './LogIn.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUserContext } from "../../provider/userProvider";
 import Button from "../buttonComponent/Button";
 
 function LogIn():JSX.Element{
     const navigate = useNavigate();
-    const {setUser} = useUserContext();
+    const {setUserSession} = useUserContext();
+    const [searchParams] = useSearchParams();
+    const back = searchParams.get("back");
+
     const handlerLogIn = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
@@ -16,8 +19,12 @@ function LogIn():JSX.Element{
             console.log(result);
             const userData = await me();
             if(userData){
-                setUser(userData);
-                navigate("/home");
+                setUserSession(userData);
+                if(back){
+                    navigate(`/${back.split('.').join('/')}`);
+                }else{
+                    navigate("/home");
+                }
             }else{
                 console.log("not user after login");
             }
@@ -57,6 +64,9 @@ function LogIn():JSX.Element{
                 />
                 </div>
                 <Button type="submit">LogIn</Button>
+                <div className="text-center text-black mt-5">
+                    <a className="underline hover:text-sky-700 hover:cursor-pointer" onClick={()=>navigate(`/register`)}>You aren't registered?</a>
+                </div>
             </form>
            </div>
         </>

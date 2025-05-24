@@ -7,7 +7,7 @@ export interface IUserSession{
     id:string,
 }
 
-const userContext = React.createContext<{user:IUserSession | undefined; setUser:React.Dispatch<React.SetStateAction<IUserSession| undefined>>
+const userContext = React.createContext<{userSession:IUserSession | undefined; setUserSession:React.Dispatch<React.SetStateAction<IUserSession| undefined>>
      } | undefined>(undefined);
 //const userChangeContext = React.createContext();
 
@@ -23,19 +23,19 @@ interface IUserProviderProps{
 }
 
 export function UserProvider({children}:IUserProviderProps){
-    const [user, setUser] = useState<IUserSession | undefined>(undefined);
+    const [userSession, setUserSession] = useState<IUserSession | undefined>(undefined);
 
     useEffect(()=>{
         me().then(response=>{
-            setUser(response)
+            setUserSession(response)
         }).catch(()=>{
             return;
         })
     }, [])
     
     return (
-        <userContext.Provider value={{user, setUser}}>
-            {children}            
+        <userContext.Provider value={{userSession, setUserSession}}>
+            {children}
         </userContext.Provider>
     )
 }

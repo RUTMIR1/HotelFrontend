@@ -1,41 +1,27 @@
-import { JSX, useEffect} from "react";
+import { JSX} from "react";
 import { UseFilterRoom } from "../../hooks/filterRoom";
 import RoomCard from "../roomCardComponent/RoomCard";
 import { useNavigate } from "react-router-dom";
+import useCategories from "../../hooks/category";
+import InputField from "../inputFieldComponent/InputField";
 
 function Rooms():JSX.Element{
-    const {rooms, categories, handlerCategoryList} = UseFilterRoom();
-
+    const {currentList, handlerFilters} = UseFilterRoom('active');
+    const {categories} = useCategories();
     const navigate = useNavigate();
-
-
-    useEffect(()=>{
-        console.log(rooms)
-    }, [rooms])
-
     
     return (
         <>
             <div className="min-h-screen">
-                <div className="h-20 flex justify-center items-center border-2">
-                    <div className="bg-slate-500 p-4 border-2">
-                        <label htmlFor="category">Category:</label>
-                        <select className="bg-white text-black" onChange={(e)=>handlerCategoryList(e)} name="category" id="category">
-                            {
-                                categories.map((el):JSX.Element=>{
-                                    return (
-                                        <>
-                                            <option value={el.name}>{el.name}</option>
-                                        </> 
-                                    ) 
-                                })
-                            }
-                        </select>
-                    </div>
+                <div className="mt-5 p-5 outline flex flex-wrap">
+                    <InputField label='Name: ' type='text' name='name' onChange={handlerFilters}></InputField>
+                    <InputField label='Category: ' options={categories.map(el=>el.name)} type='text' name='category' onChange={handlerFilters}></InputField>
+                    <InputField label='Price Min: ' type='number' name='price-min' onChange={handlerFilters}></InputField>
+                    <InputField label='Price Max: ' type='number' name='price-max' onChange={handlerFilters}></InputField>
                 </div>
                 <div className="grid grid-cols-3 gap-12 m-5">
                 {
-                    rooms.map((el):JSX.Element=>{
+                    currentList.map((el):JSX.Element=>{
                         return (
                             <>
                                 <RoomCard key={el.id} title={el.name} text={el.description} price={el.price*30} img={'room1.jpg'}

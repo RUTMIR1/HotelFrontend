@@ -9,7 +9,7 @@ import { useThemeContext } from "../../provider/themeProvider"
 
 
 function Header():JSX.Element{
-    const {user, setUser} = useUserContext();
+    const {userSession, setUserSession} = useUserContext();
     const {theme, setTheme} = useThemeContext();
     const [isMenuThemeOpen, setIsMenuThemeOpen] = useState(false);
 
@@ -17,7 +17,7 @@ function Header():JSX.Element{
 
     const handlerLogOut = async():Promise<void>=>{
         await logout();
-        setUser(undefined);
+        setUserSession(undefined);
         navigate('/home');
     }
     useEffect(():void=>{
@@ -59,7 +59,7 @@ function Header():JSX.Element{
                     </div>
                 </div>
                 {
-                    user ? (
+                    userSession ? (
                         <>
                         <div>
                             <Button children={'Perfil'} onClick={():void | Promise<void>=> navigate('/profile')}></Button>

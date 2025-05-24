@@ -1,6 +1,5 @@
-import { userValidation } from "../schemas/User.ts";
 import { Address } from "./Address";
-import { Model } from "./model.ts";
+import { Model } from "./Model.ts";
 import { Rol } from "./Rol";
 
 export class User extends Model{
@@ -14,19 +13,20 @@ export class User extends Model{
     phone_number:string;
     address:Address;
     rol:Rol;
-    constructor({name, last_name, age, dni, email, username,
+    constructor({id, name, last_name, age, dni, email, username,
         password, phone_number, country, province, city, 
-    house_number, floor, rolID, rolName}:Record<string, string | number>){
-        super();
+    house_number, floor, rolID, rolName}:Record<string, unknown>){
+        super(id as string);
         this.name = name as string;
         this.last_name = last_name as string;
-        this.age = parseInt(age as string);
+        this.age = parseInt(age as string) ;
         this.dni = dni as string;
         this.email = email as string;
         this.username = username as string;
         this.password = password as string;
         this.phone_number = phone_number as string;
         this.address = {
+            id: id as string,
             country: country as string,
             province: province as string,
             city: city as string,
@@ -39,8 +39,9 @@ export class User extends Model{
         }
     }
 
-    async validateModel(data: unknown){
-        console.log(data);
-        return await userValidation(data);
+    static empty(): User {
+        return new User({name: '',last_name: '',age: 0,dni: '',email: '',username: '',password: '',
+            phone_number: '',country: '',province: '',city: '',house_number: 0,floor: 0,rolID: '',rolName: '',
+        }); 
     }
 }

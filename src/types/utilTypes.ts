@@ -4,3 +4,9 @@ export interface TableTree{
     colSpan: number;
     children: TableTree[];
 }
+
+export interface responseError{
+    status:number;
+    message:string;
+    data?: Record<string, string>[];
+}
